@@ -1,0 +1,16 @@
+# Performance Comparison
+
+| Search ID | BST Comparisons | Linear Search Comparisons | Result |
+|---|---|---|---|
+| A102 | 1 | 1 | Equal |
+| A120 | 3 | 6 | BST faster |
+| A45 | 4 | 8 | BST faster |
+| B12 | 5 | 5 | Equal |
+| B3 | 6 | 7 | BST faster |
+| A7 | 3 | 3 | Equal |
+
+## Observation
+
+- BST is faster for A120, A45 and B3 in this experiment.
+- BST and linear search use the same number of comparisons for A102, B12 and A7.
+- The ordinary BST is unbalanced for the given insertion order, so its performance is not always close to O(log n).
