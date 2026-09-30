@@ -1,0 +1,13 @@
+# Final Conclusion
+
+The given identification numbers were inserted into a Binary Search Tree using lexicographic string comparison. The inorder traversal produced the identifiers in sorted (lexicographic) order:
+
+A102 A120 A25 A45 A7 B100 B12 B3
+
+Because the comparison is character by character, this is dictionary order rather than numeric order (for example, A25 comes after A120).
+
+The given insertion order produced an unbalanced BST with height 5 edges. The search experiment showed that BST search used fewer comparisons for several of the selected keys, although it was equal to linear search for some keys.
+
+Key length mainly affects the cost of individual string comparisons, whereas insertion order has a direct effect on BST height. A balanced BST provides O(log n) search in the usual balanced case, while an ordinary skewed BST can degrade to O(n), which is the same asymptotic worst case as linear search.
+
+Therefore, as the identification database grows, a self-balancing BST such as an AVL tree or Red-Black tree is a suitable approach for maintaining efficient searches. For very large persistent databases, B-tree / B+ tree based indexing is also commonly suitable.
