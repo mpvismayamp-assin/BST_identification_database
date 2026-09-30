@@ -1,0 +1,19 @@
+# Complexity Analysis
+
+Let n be the number of identification numbers and h the height of the BST.
+
+| Operation | Best | Average | Worst |
+|---|---|---|---|
+| BST search | O(1) - key at root | O(log n) - balanced | O(n) - skewed |
+| BST insertion | O(1) - empty tree | O(log n) - balanced | O(n) - skewed |
+| Inorder traversal | O(n) | O(n) | O(n) |
+| Linear search | O(1) | O(n) | O(n) |
+| BST storage | O(n) | O(n) | O(n) |
+
+## Additional notes
+
+- **Recursion space:** inorder traversal uses O(h) auxiliary stack space, where h is the tree height.
+- **Effect of key length:** BST height depends mainly on the number of keys and their insertion order. Longer identification strings increase the cost of each string comparison, because characters are compared until a difference is found.
+- **Effect of insertion order:** an ordinary BST is strongly affected by insertion order. A suitable order gives a more balanced tree; an unfortunate order gives a skewed tree with height close to n-1.
+- **Theoretical comparison:** balanced BST search O(log n); skewed BST search O(n); linear search O(n).
+- **Growing database:** a self-balancing BST such as an AVL tree or Red-Black tree maintains logarithmic-height search performance.
