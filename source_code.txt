@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_ID 20
+#define N 8
+
+struct Node {
+    char id[MAX_ID];
+    struct Node *left;
+    struct Node *right;
+};
+
+struct Node *createNode(const char id[]) {
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    strcpy(newNode->id, id);
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+struct Node *insert(struct Node *root, const char id[]) {
+    if (root == NULL)
+        return createNode(id);
+    if (strcmp(id, root->id) < 0)
+        root->left = insert(root->left, id);
+    else if (strcmp(id, root->id) > 0)
+        root->right = insert(root->right, id);
+    return root;
+}
+
+void inorder(struct Node *root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%s ", root->id);
+        inorder(root->right);
+    }
+}
+
+int bstSearch(struct Node *root, const char key[]) {
+    int comparisons = 0;
+    while (root != NULL) {
+        comparisons++;
+        if (strcmp(key, root->id) == 0)
+            return comparisons;
+        if (strcmp(key, root->id) < 0)
+            root = root->left;
+        else
+            root = root->right;
+    }
+    return comparisons;
+}
+
+int linearSearch(const char ids[][MAX_ID], int n, const char key[]) {
+    int comparisons = 0;
+    for (int i = 0; i < n; i++) {
+        comparisons++;
+        if (strcmp(ids[i], key) == 0)
+            return comparisons;
+    }
+    return comparisons;
+}
+
+int height(struct Node *root) {
+    if (root == NULL)
+        return -1;
+    int left = height(root->left);
+    int right = height(root->right);
+    return (left > right ? left : right) + 1;
+}
+
+void freeTree(struct Node *root) {
+    if (root != NULL) {
+        freeTree(root->left);
+        freeTree(root->right);
+        free(root);
+    }
+}
+
+int main(void) {
+    const char ids[N][MAX_ID] = {
+        "A102", "A25", "A7", "B100",
+        "B12", "A120", "B3", "A45"
+    };
+    const char searchKeys[][MAX_ID] = {
+        "A102", "A120", "A45", "B12", "B3", "A7"
+    };
+    int searchCount = sizeof(searchKeys) / sizeof(searchKeys[0]);
+    struct Node *root = NULL;
+
+    printf("BST IDENTIFICATION DATABASE\n");
+    printf("===========================\n\n");
+    printf("Input identification numbers:\n");
+    for (int i = 0; i < N; i++)
+        printf("%s ", ids[i]);
+
+    for (int i = 0; i < N; i++)
+        root = insert(root, ids[i]);
+
+    printf("\n\nInorder traversal:\n");
+    inorder(root);
+    printf("\n\nBST height (edges) = %d\n", height(root));
+
+    printf("\nSearch comparison table:\n");
+    printf("%-8s %-14s %-16s\n", "ID", "BST", "Linear");
+    printf("--------------------------------------\n");
+    for (int i = 0; i < searchCount; i++) {
+        int bst = bstSearch(root, searchKeys[i]);
+        int linear = linearSearch(ids, N, searchKeys[i]);
+        printf("%-8s %-14d %-16d\n", searchKeys[i], bst, linear);
+    }
+
+    freeTree(root);
+    return 0;
+}
