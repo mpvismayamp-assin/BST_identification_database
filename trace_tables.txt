@@ -1,0 +1,38 @@
+# Trace Tables
+
+## 4.1 BST Insertion Trace
+
+| Step | Inserted ID | Comparisons / Path | Position |
+|---|---|---|---|
+| 1 | A102 | - | Root |
+| 2 | A25 | A25 > A102 | Right of A102 |
+| 3 | A7 | A7 > A102, A7 > A25 | Right of A25 |
+| 4 | B100 | B100 > A102, B100 > A25, B100 > A7 | Right of A7 |
+| 5 | B12 | B12 > A102, B12 > A25, B12 > A7, B12 > B100 | Right of B100 |
+| 6 | A120 | A120 > A102, A120 < A25 | Left of A25 |
+| 7 | B3 | B3 > A102, B3 > A25, B3 > A7, B3 > B100, B3 > B12 | Right of B12 |
+| 8 | A45 | A45 > A102, A45 > A25, A45 < A7 | Left of A7 |
+
+Comparisons use lexicographic (character-by-character) string order, e.g. "A120" > "A102" because '2' > '0' at the fourth character, and "A120" < "A25" because '1' < '2' at the second character.
+
+## 4.2 Resulting BST
+
+- Level 0: A102
+- Level 1: A25 (right child of A102)
+- Level 2: A120 (left of A25), A7 (right of A25)
+- Level 3: A45 (left of A7), B100 (right of A7)
+- Level 4: B12 (right of B100)
+- Level 5: B3 (right of B12)
+
+Height = 5 edges (6 levels). Every node except A25 and A7 has only one child, so the tree is heavily skewed to the right.
+
+## 4.3 BST Search Trace
+
+| Key | BST Path (FOUND at last node) | BST Comps | Linear Comps |
+|---|---|---|---|
+| A102 | A102 | 1 | 1 |
+| A120 | A102 -> A25 -> A120 | 3 | 6 |
+| A45 | A102 -> A25 -> A7 -> A45 | 4 | 8 |
+| B12 | A102 -> A25 -> A7 -> B100 -> B12 | 5 | 5 |
+| B3 | A102 -> A25 -> A7 -> B100 -> B12 -> B3 | 6 | 7 |
+| A7 | A102 -> A25 -> A7 | 3 | 3 |
