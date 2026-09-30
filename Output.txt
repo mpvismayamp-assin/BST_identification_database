@@ -1,0 +1,20 @@
+BST IDENTIFICATION DATABASE
+===========================
+
+Input identification numbers:
+A102 A25 A7 B100 B12 A120 B3 A45 
+
+Inorder traversal:
+A102 A120 A25 A45 A7 B100 B12 B3 
+
+BST height (edges) = 5
+
+Search comparison table:
+ID       BST            Linear          
+--------------------------------------
+A102     1              1               
+A120     3              6               
+A45      4              8               
+B12      5              5               
+B3       6              7               
+A7       3              3
